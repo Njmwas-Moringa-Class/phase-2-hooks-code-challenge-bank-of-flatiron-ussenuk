@@ -1,7 +1,24 @@
 import React from "react";
 import Transaction from "./Transaction";
 
-function TransactionsList() {
+function TransactionsList({search, transactions, setTransactions}) {
+
+
+  const filteredTransactions = transactions ? transactions.filter(item => item.description.includes(search)) : [];
+  // add this callback function
+
+  // display the transactionList
+
+  const transactionList = filteredTransactions.map((item)=>{ 
+    return(
+    <Transaction
+
+      key={item.id}
+      transaction={item}
+    />
+    )
+  })
+    
   return (
     <table className="ui celled striped padded table">
       <tbody>
@@ -19,7 +36,7 @@ function TransactionsList() {
             <h3 className="ui center aligned header">Amount</h3>
           </th>
         </tr>
-        {/* render a list of <Transaction> components here */}
+        { transactionList }
       </tbody>
     </table>
   );
